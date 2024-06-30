@@ -1,5 +1,6 @@
 import java.util.Date;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class BlockchainTest {
 
@@ -18,7 +19,8 @@ public class BlockchainTest {
         blockchain.addBlock(new Block(2, new Date(), "This is second block!"));
 
         ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(blockchain);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String json = mapper.writeValueAsString(blockchain.chain);
         System.out.println(json);
 
         System.out.println("Verifying block!");
